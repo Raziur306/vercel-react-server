@@ -18,7 +18,7 @@ const uploadRepository = async (
     const files = await getAllFiles(uploadDir);
 
     files.forEach(async (file) => {
-      await uploadFileCloud(file.slice(uploadDir.length + 9), file);
+      await uploadFileCloud(file.slice(uploadDir.length - 15), file);
     });
 
     redisPublisher.lPush("build-queue", id);
