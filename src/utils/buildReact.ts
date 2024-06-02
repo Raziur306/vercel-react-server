@@ -24,7 +24,7 @@ export const buildReact = async (id: string) => {
 export const uploadFinalBuild = async (id: string) => {
   try {
     console.log("uploading build project...");
-    const buildDir = path.join(__dirname, "../../downloads/", id, "/build");
+    const buildDir = path.join(__dirname, "../../downloads/", id, "/dist");
 
     const allFiles = await getAllFiles(buildDir);
 
