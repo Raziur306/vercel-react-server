@@ -29,7 +29,7 @@ const uploadRepository = async (
 
     res
       .status(201)
-      .json({ repoId: id, message: "Repository uploaded successfully" });
+      .json({ repoId: id, message: "Repository uploaded successfully ✔" });
   } catch (error) {
     res.status(500).json({ error: error });
   }

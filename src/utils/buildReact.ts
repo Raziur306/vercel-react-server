@@ -1,5 +1,7 @@
 import { exec, spawn } from "child_process";
 import path from "path";
+import { getAllFiles } from "./getAllFiles";
+import { uploadFileCloud } from "./cloudUpload";
 
 export const buildReact = async (id: string) => {
   console.log("Build Process started..");
@@ -17,4 +19,21 @@ export const buildReact = async (id: string) => {
       resolve("");
     });
   });
+};
+
+export const uploadFinalBuild = async (id: string) => {
+  try {
+    console.log("uploading build project...");
+    const buildDir = path.join(__dirname, "../../downloads/", id, "/build");
+
+    const allFiles = await getAllFiles(buildDir);
+
+    allFiles.forEach(async (file) => {
+      await uploadFileCloud(`build/${id}${file.slice(buildDir.length)}`, file);
+    });
+
+    console.log(`All build file uploaded successfully ✔`);
+  } catch (error) {
+    console.log(error);
+  }
 };
