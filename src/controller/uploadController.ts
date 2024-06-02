@@ -5,6 +5,7 @@ import path from "path";
 import { getAllFiles } from "../utils/getAllFiles";
 import { uploadFileCloud } from "../utils/cloudUpload";
 import { redisPublisher } from "../config/redis.config";
+import { rm } from "fs/promises";
 
 const uploadRepository = async (
   req: express.Request,
@@ -20,6 +21,9 @@ const uploadRepository = async (
     files.forEach(async (file) => {
       await uploadFileCloud(file.slice(uploadDir.length - 15), file);
     });
+
+    await rm(uploadDir, { recursive: true });
+    console.log(`File uploaded and directory ${uploadDir} has been deleted ✔`);
 
     redisPublisher.lPush("build-queue", id);
 

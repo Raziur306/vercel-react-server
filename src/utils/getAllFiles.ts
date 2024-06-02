@@ -15,5 +15,7 @@ export const getAllFiles = async (pathDir: string) => {
       fileList.push(filePath);
     }
   }
+
+
   return fileList;
 };
