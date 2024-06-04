@@ -11,7 +11,8 @@ export const watchRedisQueue = async () => {
         "build-queue",
         0
       );
-      await downloadS3Folder(`uploads/${response?.element}`);
+      console.log(response);
+       await downloadS3Folder(`uploads/${response?.element}`);
       await buildReact(`${response?.element}`);
       await uploadFinalBuild(`${response?.element}`);
     }

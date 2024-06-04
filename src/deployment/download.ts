@@ -6,6 +6,7 @@ import { Readable } from "stream";
 
 export const downloadS3Folder = async (prefix: string) => {
   console.log("Download started...");
+  console.log(prefix);
   try {
     const allFiles = await s3.send(
       new ListObjectsV2Command({
